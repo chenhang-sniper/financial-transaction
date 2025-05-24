@@ -1,5 +1,6 @@
 package com.financial.transaction.api.service.impl;
 
+import com.financial.transaction.api.dto.PageSearchDto;
 import com.financial.transaction.api.enums.Status;
 import com.financial.transaction.api.exceptions.ServiceException;
 import com.financial.transaction.api.service.TransactionService;
@@ -112,38 +113,32 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     /**
-     * 分页列出交易记录。
-     * 根据多种条件筛选交易记录，并按照指定的页码和页面大小返回结果。
+     * 根据关键字和分页搜索条件列出交易记录
+     * 该方法使用Spring的缓存机制，将结果缓存到名为"transactions"的缓存中，key为keyword
+     * 这样，下次请求相同keyword时，将直接从缓存中获取数据，而不是重新执行方法
      *
-     * @param accountId 账户ID。
-     * @param transactionType 交易类型。
-     * @param transactionStatus 交易状态。
-     * @param transactionMethod 交易方式。
-     * @param starTime 开始时间。
-     * @param endTime 结束时间。
-     * @param pageNo 页码。
-     * @param pageSize 页面大小。
-     * @return 包含交易记录的分页结果。
+     * @param keyword 关键字，用于缓存的唯一标识
+     * @param pageSearchDto 分页搜索条件，包含页码和页面大小
+     * @return 返回一个分页结果对象，包含交易记录列表和分页信息
      */
     @Override
-    @Cacheable(value = "transactions", key = "#accountId ?: 'null' + #transactionType ?: 'null' + #transactionStatus ?: 'null' + #transactionMethod ?: 'null' + #starTime ?: 'null' + #endTime ?: 'null' + #pageNo + #pageSize")
-    public PageListingResult<Transaction> listPaging(String accountId,
-                                                     TransactionType transactionType,
-                                                     TransactionStatus transactionStatus,
-                                                     TransactionMethod transactionMethod,
-                                                     LocalDateTime starTime,
-                                                     LocalDateTime endTime,
-                                                     Integer pageNo,
-                                                     Integer pageSize) {
-
+    @Cacheable(value = "transactions", key = "#keyword")
+    public PageListingResult<Transaction> listPaging(String keyword, PageSearchDto pageSearchDto) {
+        // 获取读锁，以确保线程安全在读取操作中
         lock.readLock().lock();
         try {
-            List<Transaction> transactionList = transactionDao.queryList(accountId, transactionType,
-                    transactionStatus, transactionMethod, starTime, endTime);
+            // 获取分页参数
+            int pageNo = pageSearchDto.getPageNo();
+            int pageSize = pageSearchDto.getPageSize();
+            // 查询交易记录列表
+            List<Transaction> transactionList = transactionDao.queryList(pageSearchDto);
             if(!CollectionUtils.isEmpty(transactionList)){
+                // 计算分页的起始和结束索引
                 int start = (pageNo - 1) * pageSize;
                 int end = Math.min(start + pageSize, transactionList.size());
+                // 提取当前页的交易记录列表
                 List<Transaction> list = transactionList.subList(start, end);
+                // 构建并返回分页结果对象
                 PageListingResult rs = PageListingResult.<Transaction>builder()
                         .totalCount(transactionList.size())
                         .currentPage(pageNo)
@@ -154,6 +149,7 @@ public class TransactionServiceImpl implements TransactionService {
             }
             return null;
         } finally {
+            // 释放读锁
             lock.readLock().unlock();
         }
 

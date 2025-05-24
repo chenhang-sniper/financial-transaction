@@ -7,10 +7,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import lombok.Data;
+
 
 @Schema(description = "交易创建请求参数")
-@Data
 public class TransactionCreateRequest {
     @Schema(description = "交易唯一标识符，可选", example = "1234567890")
     private Long id;
@@ -32,4 +31,60 @@ public class TransactionCreateRequest {
 
     @Schema(description = "交易状态", example = "PENDING")
     private TransactionStatus transactionStatus;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
+
+    public TransactionMethod getTransactionMethod() {
+        return transactionMethod;
+    }
+
+    public void setTransactionMethod(TransactionMethod transactionMethod) {
+        this.transactionMethod = transactionMethod;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public LocalDateTime getTransactionTime() {
+        return transactionTime;
+    }
+
+    public void setTransactionTime(LocalDateTime transactionTime) {
+        this.transactionTime = transactionTime;
+    }
+
+    public TransactionStatus getTransactionStatus() {
+        return transactionStatus;
+    }
+
+    public void setTransactionStatus(TransactionStatus transactionStatus) {
+        this.transactionStatus = transactionStatus;
+    }
 }

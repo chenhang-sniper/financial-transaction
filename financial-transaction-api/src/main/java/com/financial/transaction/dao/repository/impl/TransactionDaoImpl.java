@@ -1,5 +1,6 @@
 package com.financial.transaction.dao.repository.impl;
 
+import com.financial.transaction.api.dto.PageSearchDto;
 import com.financial.transaction.common.enums.TransactionMethod;
 import com.financial.transaction.common.enums.TransactionStatus;
 import com.financial.transaction.common.enums.TransactionType;
@@ -24,40 +25,30 @@ public class TransactionDaoImpl extends BaseDao<Transaction, MemoryMapper<Transa
         implements TransactionDao {
 
     /**
-     * 根据多个筛选条件查询交易记录列表。
+     * 根据分页查询条件获取交易记录列表
      *
-     * @param accountId 用户账户ID，如果为空，则不按此字段筛选。
-     * @param transactionType 交易类型，如果为空，则不按此字段筛选。
-     * @param transactionStatus 交易状态，如果为空，则不按此字段筛选。
-     * @param transactionMethod 交易方式，如果为空，则不按此字段筛选。
-     * @param starTime 开始时间，如果为空，则不按此字段筛选。
-     * @param endTime 结束时间，如果为空，则不按此字段筛选。
-     * @return 筛选并排序后的交易记录列表。
+     * @param pageSearchDto 分页查询条件对象，包含分页信息及查询参数
+     * @return 交易记录列表，满足查询条件的交易对象集合
      */
     @Override
-    public List<Transaction> queryList(String accountId,
-                                       TransactionType transactionType,
-                                       TransactionStatus transactionStatus,
-                                       TransactionMethod transactionMethod,
-                                       LocalDateTime starTime,
-                                       LocalDateTime endTime) {
+    public List<Transaction> queryList(PageSearchDto pageSearchDto) {
         // 从内存映射中获取所有交易记录
         List<Transaction> list = memoryMapper.queryList();
         // 如果获取到的交易记录列表不为空，则进行筛选和排序操作
         if(!CollectionUtils.isEmpty(list)){
             // 根据传入的筛选条件过滤交易记录，并按交易时间排序
-            List<Transaction> sortedList = list.stream().filter(transaction -> StringUtils.isEmpty(accountId) ||
-                            transaction.getAccountId().equals(accountId))
-                    .filter(transaction -> transactionType == null ||
-                            transaction.getTransactionType() == transactionType)
-                    .filter(transaction -> transactionStatus == null ||
-                            transaction.getTransactionStatus() == transactionStatus)
-                    .filter(transaction -> transactionType == null ||
-                            transaction.getTransactionMethod() == transactionMethod)
-                    .filter(transaction -> starTime == null ||
-                            transaction.getTransactionTime().isAfter(starTime))
-                    .filter(transaction -> endTime == null ||
-                            transaction.getTransactionTime().isBefore(endTime))
+            List<Transaction> sortedList = list.stream().filter(transaction -> StringUtils.isEmpty(pageSearchDto.getAccountId()) ||
+                            transaction.getAccountId().equals(pageSearchDto.getAccountId()))
+                    .filter(transaction -> pageSearchDto.getTransactionType() == null ||
+                            transaction.getTransactionType() ==  pageSearchDto.getTransactionType())
+                    .filter(transaction ->  pageSearchDto.getTransactionStatus() == null ||
+                            transaction.getTransactionStatus() ==  pageSearchDto.getTransactionStatus())
+                    .filter(transaction -> pageSearchDto.getTransactionMethod() == null ||
+                            transaction.getTransactionMethod() == pageSearchDto.getTransactionMethod())
+                    .filter(transaction -> pageSearchDto.getStarTime() == null ||
+                            transaction.getTransactionTime().isAfter(pageSearchDto.getStarTime()))
+                    .filter(transaction -> pageSearchDto.getEndTime() == null ||
+                            transaction.getTransactionTime().isBefore(pageSearchDto.getEndTime()))
                     .sorted(Comparator.comparing(Transaction::getTransactionTime))
                     .toList();
             return sortedList;

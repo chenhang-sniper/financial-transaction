@@ -27,6 +27,15 @@ public enum Status {
     ;
 
     private final int code;
+
+    public String getEnMsg() {
+        return enMsg;
+    }
+
+    public String getZhMsg() {
+        return zhMsg;
+    }
+
     private final String enMsg;
     private final String zhMsg;
 

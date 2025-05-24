@@ -1,5 +1,6 @@
 package com.financial.transaction.api.controller;
 
+import com.financial.transaction.api.dto.PageSearchDto;
 import com.financial.transaction.api.utils.PageInfo;
 import com.financial.transaction.api.vo.TransactionCreateRequest;
 import com.financial.transaction.api.vo.TransactionResponseVo;
@@ -119,9 +120,11 @@ public class TransactionController {
     @ApiException(FIND_TRANSACTION_LIST_ERROR)
     public Result<PageInfo<TransactionResponseVo>> listPaging(@RequestBody TransactionSearchRequest request) {
         TransactionValidator.checkPageParams(request.getPageNo(), request.getPageSize());
-        PageListingResult<Transaction> result = transactionService.listPaging(request.getAccountId(), request.getTransactionType(), request.getTransactionStatus(), request.getTransactionMethod(),
-                request.getStarTime(), request.getEndTime(),
-                request.getPageNo(), request.getPageSize());
+
+        PageSearchDto pageSearchDto = new PageSearchDto();
+        BeanUtils.copyProperties(request, pageSearchDto);
+
+        PageListingResult<Transaction> result = transactionService.listPaging(pageSearchDto.getKeyword(), pageSearchDto);
         PageInfo resp = new PageInfo(request.getPageNo(), request.getPageSize());
         if(result == null || CollectionUtils.isEmpty(result.getRecords())){
             return Result.success(resp);

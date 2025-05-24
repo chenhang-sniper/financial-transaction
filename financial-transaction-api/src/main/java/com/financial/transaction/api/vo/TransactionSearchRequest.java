@@ -4,12 +4,9 @@ import com.financial.transaction.common.enums.TransactionMethod;
 import com.financial.transaction.common.enums.TransactionStatus;
 import com.financial.transaction.common.enums.TransactionType;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-
 
 import java.time.LocalDateTime;
 
-@Data
 public class TransactionSearchRequest {
     @Schema(description = "账户ID，用于筛选特定账户的交易记录", example = "ACC123456")
     private String accountId; // 账户ID
@@ -34,4 +31,68 @@ public class TransactionSearchRequest {
 
     @Schema(description = "每页大小，默认为10", example = "10")
     private Integer pageSize = 10; // 每页大小
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
+
+    public TransactionMethod getTransactionMethod() {
+        return transactionMethod;
+    }
+
+    public void setTransactionMethod(TransactionMethod transactionMethod) {
+        this.transactionMethod = transactionMethod;
+    }
+
+    public LocalDateTime getStarTime() {
+        return starTime;
+    }
+
+    public void setStarTime(LocalDateTime starTime) {
+        this.starTime = starTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public TransactionStatus getTransactionStatus() {
+        return transactionStatus;
+    }
+
+    public void setTransactionStatus(TransactionStatus transactionStatus) {
+        this.transactionStatus = transactionStatus;
+    }
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
 }

@@ -4,12 +4,11 @@ import com.financial.transaction.common.enums.TransactionMethod;
 import com.financial.transaction.common.enums.TransactionStatus;
 import com.financial.transaction.common.enums.TransactionType;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
+
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Data
 public class TransactionUpdateRequest {
     @Schema(description = "交易唯一标识符", example = "1234567890")
     private Long id; // 交易ID
@@ -31,4 +30,60 @@ public class TransactionUpdateRequest {
 
     @Schema(description = "交易状态，PENDING(交易中), SUCCESS(已成功), CANCELLED(已撤销)", example = "PENDING")
     private TransactionStatus transactionStatus; // 交易状态
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
+
+    public TransactionMethod getTransactionMethod() {
+        return transactionMethod;
+    }
+
+    public void setTransactionMethod(TransactionMethod transactionMethod) {
+        this.transactionMethod = transactionMethod;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public LocalDateTime getTransactionTime() {
+        return transactionTime;
+    }
+
+    public void setTransactionTime(LocalDateTime transactionTime) {
+        this.transactionTime = transactionTime;
+    }
+
+    public TransactionStatus getTransactionStatus() {
+        return transactionStatus;
+    }
+
+    public void setTransactionStatus(TransactionStatus transactionStatus) {
+        this.transactionStatus = transactionStatus;
+    }
 }

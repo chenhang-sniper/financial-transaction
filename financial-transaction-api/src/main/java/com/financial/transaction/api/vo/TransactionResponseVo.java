@@ -6,7 +6,6 @@ import com.financial.transaction.common.enums.TransactionStatus;
 import com.financial.transaction.common.enums.TransactionType;
 import com.financial.transaction.dao.pojo.Transaction;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
@@ -17,8 +16,79 @@ import java.time.LocalDateTime;
  * 用于向前端返回交易相关的详细信息
  */
 @Schema(description = "交易响应数据，包含交易的完整信息")
-@Data
 public class TransactionResponseVo {
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
+
+    public TransactionMethod getTransactionMethod() {
+        return transactionMethod;
+    }
+
+    public void setTransactionMethod(TransactionMethod transactionMethod) {
+        this.transactionMethod = transactionMethod;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public LocalDateTime getTransactionTime() {
+        return transactionTime;
+    }
+
+    public void setTransactionTime(LocalDateTime transactionTime) {
+        this.transactionTime = transactionTime;
+    }
+
+    public TransactionStatus getTransactionStatus() {
+        return transactionStatus;
+    }
+
+    public void setTransactionStatus(TransactionStatus transactionStatus) {
+        this.transactionStatus = transactionStatus;
+    }
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
+    }
 
     @Schema(description = "交易流水ID，唯一标识符", example = "1234567890")
     @JsonFormat(shape = JsonFormat.Shape.STRING)

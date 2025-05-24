@@ -29,7 +29,7 @@ public class TransactionValidator {
             throw new ServiceException(Status.REQUEST_PARAMS_NOT_VALID_ERROR,"Transaction amount must be greater than zero.");
         }
         // Check if the transaction account ID is null
-        if (request.getAccountId() == null) {
+        if (request.getAccountId() == null || "".equals(request.getAccountId())) {
             throw new ServiceException(Status.REQUEST_PARAMS_NOT_VALID_ERROR, "Transaction account cannot be null.");
         }
     }
@@ -50,7 +50,7 @@ public class TransactionValidator {
             throw new ServiceException(Status.REQUEST_PARAMS_NOT_VALID_ERROR,"Transaction amount must be greater than zero.");
         }
         // Check if the transaction account ID is null
-        if (request.getAccountId() == null) {
+        if (request.getAccountId() == null || "".equals(request.getAccountId())) {
             throw new ServiceException(Status.REQUEST_PARAMS_NOT_VALID_ERROR, "Transaction account cannot be null.");
         }
     }

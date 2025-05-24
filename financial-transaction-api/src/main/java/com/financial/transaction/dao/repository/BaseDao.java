@@ -15,7 +15,8 @@ import java.util.Optional;
  * @param <Entity> 实体类类型，继承自MemoryEntity
  * @param <MAPPER> 映射器类型，继承自MemoryMapper
  */
-public abstract class BaseDao<Entity extends MemoryEntity, MAPPER extends MemoryMapper<Entity>> implements IDao<Entity> {
+public abstract class BaseDao<Entity extends MemoryEntity,
+        MAPPER extends MemoryMapper<Entity>> implements IDao<Entity> {
 
     // 映射器实例，用于数据操作
     protected MemoryMapper memoryMapper;

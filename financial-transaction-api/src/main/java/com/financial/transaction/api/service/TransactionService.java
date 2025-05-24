@@ -1,5 +1,6 @@
 package com.financial.transaction.api.service;
 
+import com.financial.transaction.api.dto.PageSearchDto;
 import com.financial.transaction.common.enums.TransactionMethod;
 import com.financial.transaction.common.enums.TransactionStatus;
 import com.financial.transaction.common.enums.TransactionType;
@@ -41,21 +42,13 @@ public interface TransactionService {
      */
     Transaction findTransaction(Long id);
 
+
     /**
-     * 分页列表查询交易记录
+     * 根据关键字和分页搜索条件获取交易列表
      *
-     * @param accountId 账户ID，用于筛选交易记录
-     * @param transactionType 交易类型，用于筛选交易记录
-     * @param transactionStatus 交易状态，用于筛选交易记录
-     * @param transactionMethod 交易方式，用于筛选交易记录
-     * @param starTime 开始时间，用于筛选交易记录
-     * @param endTime 结束时间，用于筛选交易记录
-     * @param pageNo 页码，用于指定查询的页数
-     * @param pageSize 每页大小，用于指定每页的记录数
-     * @return 返回分页后的交易记录列表
+     * @param keyword 关键字，用于模糊匹配交易的相关信息
+     * @param pageSearchDto 分页搜索条件对象，包含分页大小、当前页码等信息
+     * @return 返回一个包含交易记录的分页列表结果对象
      */
-    PageListingResult<Transaction> listPaging(String accountId, TransactionType transactionType,
-                                              TransactionStatus transactionStatus, TransactionMethod transactionMethod,
-                                              LocalDateTime starTime, LocalDateTime endTime,
-                                              Integer pageNo, Integer pageSize);
+    PageListingResult<Transaction> listPaging(String keyword, PageSearchDto pageSearchDto);
 }

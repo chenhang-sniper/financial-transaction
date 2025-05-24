@@ -19,15 +19,15 @@
 系统采用分层架构设计，前后端分离，每个部分都有明确的职责和功能：
 
 - **前端模块**：
-  - 使用 Vue3 和 NodeJS 进行开发，构建动态、响应式的用户界面。
-  - 通过 Vuex 进行状态管理，实现组件之间的数据共享和通信。
-  - 使用 Element-Plus 提供的高质量 UI 组件库来构建现代化的页面，提升用户体验。
+    - 使用 Vue3 和 NodeJS 进行开发，构建动态、响应式的用户界面。
+    - 通过 Vuex 进行状态管理，实现组件之间的数据共享和通信。
+    - 使用 Element-Plus 提供的高质量 UI 组件库来构建现代化的页面，提升用户体验。
 
 - **后端模块**：
-  - 基于 SpringMVC 框架，明确划分控制层、服务层和数据访问层。
-  - 数据访问层采用抽象 BaseDao 设计，利用动态代理模式代理内存数据库，实现数据源的灵活切换。
-  - 在数据服务层，利用 Spring Cache 缓存查询结果和列表数据，减少重复计算和数据访问。
-  - 控制层遵循 RESTful API 设计原则，通过 Swagger 自动生成接口文档，方便前端调试和集成。
+    - 基于 SpringMVC 框架，明确划分控制层、服务层和数据访问层。
+    - 数据访问层采用抽象 BaseDao 设计，利用动态代理模式代理内存数据库，实现数据源的灵活切换。
+    - 在数据服务层，利用 Spring Cache 缓存查询结果和列表数据，减少重复计算和数据访问。
+    - 控制层遵循 RESTful API 设计原则，通过 Swagger 自动生成接口文档，方便前端调试和集成。
 
 ---
 
@@ -76,24 +76,53 @@ docker-compose --version
 
 ### 2. 构建镜像
 在项目根目录下运行以下命令来构建前端和后端镜像：
+```bash
 docker-compose build
-
+```
 ### 3. 启动服务
 启动前端和后端服务：
+```bash
 docker-compose up -d
-
+```
 ### 4. 验证部署
-查看后端 API 文档
-- 访问 http://localhost:8080/swagger-ui.html
-查看前端应用 
-- 访问 http://localhost 
+- 查看后端 API 文档
+   访问 http://8.138.192.95:8080/swagger-ui/index.html
+- 查看前端应用
+   访问 http://8.138.192.95
 
 ### 5. 停止和删除服务
 停止服务：
+```bash
 docker-compose stop
+```
 删除服务和镜像：
+```bash
 docker-compose down
+```
 
+### 6.第三方库
+- Spring Boot Starter Web
+  - 用于构建 Web 应用程序，提供嵌入式 Tomcat 服务器和 Spring MVC 支持，简化 Web 开发流程。
+- Spring Boot Starter
+  - 提供 Spring Boot 应用的基本配置和依赖项，是构建 Spring Boot 应用的核心依赖。
+-  Spring Boot Starter Validation
+  - 提供数据验证功能，支持使用 JSR-380 规范对数据进行校验，确保输入数据的合法性。
+- SpringDoc OpenAPI Starter Webmvc UI
+  - 用于生成 API 文档和交互式界面，便于开发者查看和测试 API，符合 OpenAPI 标准。
+- Jackson Databind
+  - 处理 JSON 数据的序列化和反序列化，方便 JSON 格式数据的转换和操作，支持对象与 JSON 的双向转换。
+- Lombok
+  - 通过注解简化代码编写，减少样板代码，如自动生成 getter/setter 方法、构造函数、toString 方法等。
+- Spring Context
+  - 提供 Spring 框架的核心功能，包括依赖注入、事件发布/订阅等，是 Spring 应用的基础模块。
+- JUnit Jupiter API
+  - 提供 JUnit 5 测试框架的 API，用于编写和运行单元测试，支持更灵活的测试语法和注解。
+- JUnit Jupiter Engine
+  - 提供 JUnit 5 测试框架的运行引擎，用于执行单元测试，支持测试的发现和运行。
+- Spring Boot Starter Cache
+  - 提供缓存支持，方便与各种缓存实现（如 EhCache、Redis 等）进行集成，提高应用性能。
+- Mockito Core
+  - 提供模拟对象功能，用于在单元测试中模拟依赖项的行为，便于编写隔离的单元测试。
 
 ## 七、源代码相关描述
 
@@ -207,15 +236,28 @@ public class MemoryMapper<Entity extends MemoryEntity> {
 ```
 
 ## 八、测试
--  单元测试：使用 JUnit 和 Mockito 对各模块进行单元测试。
--  集成测试：启动 Docker 容器后，通过 Postman 或 curl 测试 API 接口。
-
+### 1. 单元测试
+  -  使用使用Maven Surefire Report Plugin执行测试，并生成单元测试报告。在Maven中，可以通过以下命令来执行：
+   ```bash
+    mvn  surefire-report:report
+   ```
+以下是单元测试报告的链接：[测试报告](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/report/surefire-report.html)
+  -  使用JaCoCo插件执行测试，并生成覆盖率报告。在Maven中，可以通过以下命令来执行：
+   ```bash
+    mvn  test
+   ```
+以下是覆盖率报告的链接：[覆盖率报告](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/images/test-coverage.png)
+### 2. 压力测试
+  -  使用JMeter进行压力测试，编写[测试样例数据](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/report/sample_data.csv)1000条，安装Random CSV Data插件，编写测试脚本，并运行测试。
+  -  使用10000个线程1秒钟并发请求，由于是内存存储实体，所以速度还是挺快的，吞吐量基本上达到单个tomcat的性能峰值。测试结果截图示例如下：
+  -  ![](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/iamge/pressure-test.png)
+ 
 ## 九、接口文档
-接口文档地址：[https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/api.json](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/docs/api.json)
+  -   [接口文档](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/api.json)
 
 ## 十、扩展
 1. 数据同步优化
-- 当多个线程同时更新同一实体时，可能会出现数据直接覆盖的情况，建议使用版本号来实现友好更新.
+- 当多个线程同时更新同一实体时，会出现数据互相直接覆盖的情况，建议使用版本号来实现友好更新.
 - 在更新操作中，先检查本地实体的版本号与 ConcurrentMap 中最新实体的版本号是否一致。若一致，则执行更新操作；
 - 若不一致，则说明有其他线程已更新了该实体，此时应提示用户数据已发生变更，需重新获取最新数据后再次尝试更新。
 2. 缓存优化
