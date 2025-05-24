@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5be73a5e-4141-4730-8f51-2014378babee" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/io/micrometer/micrometer-commons/1.12.4/micrometer-commons-1.12.4.jar!/io/micrometer/common/util/StringUtils.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/6.1.5/spring-core-6.1.5.jar!/org/springframework/util/CollectionUtils.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/6.1.5/spring-core-6.1.5.jar!/org/springframework/util/StringUtils.class" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/financial-transaction-api/src/main/java/com/financial/transaction/api/enums/Status.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/financial-transaction-api/src/main/java/com/financial/transaction/api/exceptions/ApiException.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/financial-transaction-api/src/main/java/com/financial/transaction/api/exceptions/ApiExceptionHandler.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/financial-transaction-api/src/main/java/com/financial/transaction/api/exceptions/ServiceException.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/financial-transaction-api/src/main/java/com/financial/transaction/api/utils/PageInfo.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/financial-transaction-api/src/main/java/com/financial/transaction/api/utils/Result.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/financial-transaction-common/src/main/java/com/financial/transaction/common/model/PageListingResult.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/financial-transaction-dao/src/main/java/com/financial/transaction/dao/repository/BaseDao.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/financial-transaction-dao/src/main/java/com/financial/transaction/dao/repository/IDao.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="workOffline" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2xRSAjQzcP9HOPYU8gYrSqV1AXr" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.FinancialTransactionApplication.executor": "Debug",
+    "Application.SnowflakeIdGenerator.executor": "Debug",
+    "JUnit.TransactionControllerTest.testCreateTransaction_ValidationFails.executor": "Debug",
+    "JUnit.TransactionControllerTest.testDeleteTransaction_Success.executor": "Run",
+    "JUnit.TransactionControllerTest.testFindTransaction_NotExists.executor": "Debug",
+    "JUnit.TransactionControllerTest.testUpdateTransaction_Success.executor": "Run",
+    "JUnit.TransactionServiceImplTest.executor": "Run",
+    "JUnit.TransactionValidatorTest.executor": "Run",
+    "Maven.financial-transaction [clean].executor": "Run",
+    "Maven.financial-transaction [compile].executor": "Run",
+    "Maven.financial-transaction [install].executor": "Run",
+    "Maven.financial-transaction [org.jacoco:jacoco-maven-plugin:0.8.12:report].executor": "Run",
+    "Maven.financial-transaction [package].executor": "Run",
+    "Maven.financial-transaction [test].executor": "Run",
+    "Maven.financial-transaction-api [clean].executor": "Run",
+    "Maven.financial-transaction-api [compile].executor": "Run",
+    "Maven.financial-transaction-api [package].executor": "Debug",
+    "Maven.financial-transaction-common [clean].executor": "Run",
+    "Maven.financial-transaction-common [compile].executor": "Run",
+    "Maven.financial-transaction-common [package].executor": "Run",
+    "Maven.financial-transaction-dao [clean].executor": "Run",
+    "Maven.financial-transaction-dao [compile].executor": "Run",
+    "Maven.financial-transaction-dao [deploy].executor": "Run",
+    "Maven.financial-transaction-dao [package].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.FinancialTransactionApplication (1).executor": "Debug",
+    "Spring Boot.FinancialTransactionApplication.executor": "Debug",
+    "disable.download.node.interpreter.editor.notification": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/code/financial-transaction/docs/images",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "C:/Users/18218/AppData/Roaming/JetBrains/IntelliJIdea2024.2/node/versions/18.20.8/node",
+    "nodejs_package_manager_path": "npm",
+    "npm.build.executor": "Run",
+    "npm.lint.executor": "Run",
+    "npm.lint:fix.executor": "Run",
+    "npm.serve.executor": "Debug",
+    "onboarding.tips.debug.path": "D:/code/financial-transaction/untitled/src/main/java/com/financial/Main.java",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "D:\\soft\\IntelliJ IDEA 2024.2.0.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\code\financial-transaction\docs\images" />
+      <recent name="D:\code\financial-transaction\docs\docs" />
+      <recent name="D:\code\financial-transaction\financial-transaction-api\src\main\java\com\financial\transaction\api\utils" />
+      <recent name="D:\code\financial-transaction\financial-transaction-api\src\main\java\com\financial\transaction\api\exceptions" />
+      <recent name="D:\code\financial-transaction\financial-transaction-common\src\main\java\com\financial\transaction\common\model" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\code\financial-transaction\financial-transaction-api\src\main\java\com\financial\transaction\common" />
+      <recent name="D:\code\financial-transaction" />
+      <recent name="D:\code\financial-transaction\deploy" />
+      <recent name="D:\code\financial-transaction\financial-transaction-api\src\test\java\com\financial\transaction\api\service" />
+      <recent name="D:\code\financial-transaction\financial-transaction-api\src\test\java\com\financial\transaction\api\validator" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.financial.transaction" />
+      <recent name="com.financial" />
+      <recent name="com" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.financial.transaction.api.vo" />
+      <recent name="com.financial.transaction.api.service.impl" />
+      <recent name="com.financial.transaction.dao.repository.impl" />
+      <recent name="com.financial.transaction.common.enums" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Maven.financial-transaction-api [clean]">
+    <configuration name="financial-transaction-api [clean]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/financial-transaction-api" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="financial-transaction-api [compile]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="compile" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/financial-transaction-api" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="financial-transaction-api [package]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="package" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/financial-transaction-api" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="FinancialTransactionApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="financial-transaction-api" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.financial.transaction.api.FinancialTransactionApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/financial-transaction-ui/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="serve" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/financial-transaction-ui/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="serve" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Maven.financial-transaction-api [clean]" />
+        <item itemvalue="Maven.financial-transaction-api [package]" />
+        <item itemvalue="npm.serve" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="Maven.financial-transaction-api [compile]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.387" />
+        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.387" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5be73a5e-4141-4730-8f51-2014378babee" name="Changes" comment="" />
+      <created>1747899254557</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1747899254557</updated>
+      <workItem from="1747899255702" duration="27536000" />
+      <workItem from="1747985408097" duration="117000" />
+      <workItem from="1747985539309" duration="43147000" />
+      <workItem from="1748037320617" duration="7044000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/financial-transaction-api/src/main/java/com/financial/transaction/api/exceptions/ApiExceptionHandler.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/financial-transaction-api/src/main/java/com/financial/transaction/api/exceptions/ApiExceptionHandler.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/untitled/src/main/java/com/financial/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/financial-transaction-api/src/main/java/com/financial/transaction/api/service/impl/TransactionServiceImpl.java</url>
+          <line>108</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/financial-transaction-api/src/main/java/com/financial/transaction/api/service/impl/TransactionServiceImpl.java</url>
+          <line>136</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/financial-transaction-api/src/main/java/com/financial/transaction/api/service/impl/TransactionServiceImpl.java</url>
+          <line>83</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/financial-transaction-api/src/main/java/com/financial/transaction/api/service/impl/TransactionServiceImpl.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/financial-transaction-api/src/main/java/com/financial/transaction/api/service/impl/TransactionServiceImpl.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/financial-transaction-api/src/main/java/com/financial/transaction/api/service/impl/TransactionServiceImpl.java</url>
+          <line>86</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="  private String accountId;//账户id&#10;    private TransactionType transactionType; // 交易类型&#10;    private TransactionMethod transactionMethod; // 交易方式&#10;    private BigDecimal amount; // 交易金额&#10;    private LocalDateTime transactionTime; // 交易时间&#10;    private TransactionStatus transactionStatus; // 交易状态&#10;    private LocalDateTime createTime;&#10;    private LocalDateTime updateTime;" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

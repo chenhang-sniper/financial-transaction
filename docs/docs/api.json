@@ -1,0 +1,543 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Financial Transaction API",
+        "description": "API documentation for Financial Transaction Application",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Generated server url"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Transaction Management",
+            "description": "APIs for managing transactions"
+        }
+    ],
+    "paths": {
+        "/api/v1/transactions/{id}": {
+            "get": {
+                "tags": [
+                    "Transaction Management"
+                ],
+                "summary": "findTransaction",
+                "description": "Find a transaction by ID and show details",
+                "operationId": "findTransaction",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultTransactionResponseVo"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Transaction Management"
+                ],
+                "summary": "updateTransaction",
+                "description": "Update a transaction by ID",
+                "operationId": "updateTransaction",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TransactionUpdateRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultBoolean"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Transaction Management"
+                ],
+                "summary": "deleteTransaction",
+                "description": "Delete a transaction by ID",
+                "operationId": "deleteTransaction",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultBoolean"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/transactions": {
+            "post": {
+                "tags": [
+                    "Transaction Management"
+                ],
+                "summary": "createTransaction",
+                "description": "Create a new transaction",
+                "operationId": "createTransaction",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TransactionCreateRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultBoolean"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/transactions/list": {
+            "post": {
+                "tags": [
+                    "Transaction Management"
+                ],
+                "summary": "queryTransactionListPaging",
+                "description": "Query transaction list with pagination",
+                "operationId": "listPaging",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TransactionSearchRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultPageInfoTransactionResponseVo"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "TransactionUpdateRequest": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "交易唯一标识符",
+                        "format": "int64",
+                        "example": 1234567890
+                    },
+                    "accountId": {
+                        "type": "string",
+                        "description": "账户ID，表示此次交易所属的账户信息",
+                        "example": "ACC123456"
+                    },
+                    "transactionType": {
+                        "type": "string",
+                        "description": "交易类型，例如 STOCK(股票), BOND(债券) 等",
+                        "example": "STOCK",
+                        "enum": [
+                            "STOCK",
+                            "BOND",
+                            "FUND",
+                            "FUTURES",
+                            "OPTIONS",
+                            "FOREX",
+                            "OTHERS"
+                        ]
+                    },
+                    "transactionMethod": {
+                        "type": "string",
+                        "description": "交易方式，BUY(买入) 或 SELL(卖出)",
+                        "example": "BUY",
+                        "enum": [
+                            "BUY",
+                            "SELL"
+                        ]
+                    },
+                    "amount": {
+                        "type": "number",
+                        "description": "交易金额，必须大于零",
+                        "example": 100.5
+                    },
+                    "transactionTime": {
+                        "type": "string",
+                        "description": "交易时间，格式：yyyy-MM-dd'T'HH:mm:ss",
+                        "format": "date-time"
+                    },
+                    "transactionStatus": {
+                        "type": "string",
+                        "description": "交易状态，PENDING(交易中), SUCCESS(已成功), CANCELLED(已撤销)",
+                        "example": "PENDING",
+                        "enum": [
+                            "PENDING",
+                            "SUCCESS",
+                            "CANCELLED"
+                        ]
+                    }
+                }
+            },
+            "ResultBoolean": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "msg": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "boolean"
+                    },
+                    "failed": {
+                        "type": "boolean"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "TransactionCreateRequest": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "交易唯一标识符，可选",
+                        "format": "int64",
+                        "example": 1234567890
+                    },
+                    "accountId": {
+                        "type": "string",
+                        "description": "账户ID",
+                        "example": "ACC123456"
+                    },
+                    "transactionType": {
+                        "type": "string",
+                        "description": "交易类型",
+                        "example": "STOCK",
+                        "enum": [
+                            "STOCK",
+                            "BOND",
+                            "FUND",
+                            "FUTURES",
+                            "OPTIONS",
+                            "FOREX",
+                            "OTHERS"
+                        ]
+                    },
+                    "transactionMethod": {
+                        "type": "string",
+                        "description": "交易方式",
+                        "example": "BUY",
+                        "enum": [
+                            "BUY",
+                            "SELL"
+                        ]
+                    },
+                    "amount": {
+                        "type": "number",
+                        "description": "交易金额",
+                        "example": 100.5
+                    },
+                    "transactionTime": {
+                        "type": "string",
+                        "description": "交易时间",
+                        "format": "date-time"
+                    },
+                    "transactionStatus": {
+                        "type": "string",
+                        "description": "交易状态",
+                        "example": "PENDING",
+                        "enum": [
+                            "PENDING",
+                            "SUCCESS",
+                            "CANCELLED"
+                        ]
+                    }
+                },
+                "description": "交易创建请求参数"
+            },
+            "TransactionSearchRequest": {
+                "type": "object",
+                "properties": {
+                    "accountId": {
+                        "type": "string",
+                        "description": "账户ID，用于筛选特定账户的交易记录",
+                        "example": "ACC123456"
+                    },
+                    "transactionType": {
+                        "type": "string",
+                        "description": "交易类型，例如 STOCK(股票), BOND(债券) 等",
+                        "example": "STOCK",
+                        "enum": [
+                            "STOCK",
+                            "BOND",
+                            "FUND",
+                            "FUTURES",
+                            "OPTIONS",
+                            "FOREX",
+                            "OTHERS"
+                        ]
+                    },
+                    "transactionMethod": {
+                        "type": "string",
+                        "description": "交易方式，BUY(买入) 或 SELL(卖出)",
+                        "example": "BUY",
+                        "enum": [
+                            "BUY",
+                            "SELL"
+                        ]
+                    },
+                    "starTime": {
+                        "type": "string",
+                        "description": "交易开始时间，格式：yyyy-MM-dd'T'HH:mm:ss",
+                        "format": "date-time"
+                    },
+                    "endTime": {
+                        "type": "string",
+                        "description": "交易结束时间，格式：yyyy-MM-dd'T'HH:mm:ss",
+                        "format": "date-time"
+                    },
+                    "transactionStatus": {
+                        "type": "string",
+                        "description": "交易状态，PENDING(交易中), SUCCESS(已成功), CANCELLED(已撤销)",
+                        "example": "PENDING",
+                        "enum": [
+                            "PENDING",
+                            "SUCCESS",
+                            "CANCELLED"
+                        ]
+                    },
+                    "pageNo": {
+                        "type": "integer",
+                        "description": "当前页码，默认为1",
+                        "format": "int32",
+                        "example": 1
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "description": "每页大小，默认为10",
+                        "format": "int32",
+                        "example": 10
+                    }
+                }
+            },
+            "PageInfoTransactionResponseVo": {
+                "type": "object",
+                "properties": {
+                    "totalList": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TransactionResponseVo"
+                        }
+                    },
+                    "total": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalPage": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "pageSize": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "currentPage": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "pageNo": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "ResultPageInfoTransactionResponseVo": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "msg": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/PageInfoTransactionResponseVo"
+                    },
+                    "failed": {
+                        "type": "boolean"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "TransactionResponseVo": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "交易流水ID，唯一标识符",
+                        "format": "int64",
+                        "example": 1234567890
+                    },
+                    "accountId": {
+                        "type": "string",
+                        "description": "账户ID，表示此次交易所属的账户信息",
+                        "example": "ACC123456"
+                    },
+                    "transactionType": {
+                        "type": "string",
+                        "description": "交易类型，例如 STOCK(股票), BOND(债券) 等",
+                        "example": "STOCK",
+                        "enum": [
+                            "STOCK",
+                            "BOND",
+                            "FUND",
+                            "FUTURES",
+                            "OPTIONS",
+                            "FOREX",
+                            "OTHERS"
+                        ]
+                    },
+                    "transactionMethod": {
+                        "type": "string",
+                        "description": "交易方式，BUY(买入) 或 SELL(卖出)",
+                        "example": "BUY",
+                        "enum": [
+                            "BUY",
+                            "SELL"
+                        ]
+                    },
+                    "amount": {
+                        "type": "number",
+                        "description": "交易金额，精确到小数点后两位",
+                        "example": 100.5
+                    },
+                    "transactionTime": {
+                        "type": "string",
+                        "description": "交易时间，格式：yyyy-MM-dd'T'HH:mm:ss",
+                        "format": "date-time"
+                    },
+                    "transactionStatus": {
+                        "type": "string",
+                        "description": "交易状态，PENDING(交易中), SUCCESS(已成功), CANCELLED(已撤销)",
+                        "example": "PENDING",
+                        "enum": [
+                            "PENDING",
+                            "SUCCESS",
+                            "CANCELLED"
+                        ]
+                    },
+                    "createTime": {
+                        "type": "string",
+                        "description": "交易记录创建时间，格式：yyyy-MM-dd'T'HH:mm:ss",
+                        "format": "date-time"
+                    },
+                    "updateTime": {
+                        "type": "string",
+                        "description": "交易记录最后更新时间，格式：yyyy-MM-dd'T'HH:mm:ss",
+                        "format": "date-time"
+                    }
+                },
+                "description": "交易响应数据，包含交易的完整信息"
+            },
+            "ResultTransactionResponseVo": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "msg": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/TransactionResponseVo"
+                    },
+                    "failed": {
+                        "type": "boolean"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        }
+    }
+}

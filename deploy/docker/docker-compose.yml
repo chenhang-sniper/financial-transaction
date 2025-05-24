@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  backend:
+    image: financial-transaction-backend:1.0
+    container_name: transaction-backend
+    ports:
+      - "8080:8080"
+    networks:
+      - transaction-network
+
+  frontend:
+    image: financial-transaction-frontend:1.0
+    container_name: transaction-frontend
+    ports:
+      - "80:80"
+    networks:
+      - transaction-network
+
+networks:
+  transaction-network:
+    driver: bridge
