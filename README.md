@@ -211,7 +211,7 @@ public class MemoryMapper<Entity extends MemoryEntity> {
 -  集成测试：启动 Docker 容器后，通过 Postman 或 curl 测试 API 接口。
 
 ## 九、接口文档
-接口文档地址：https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/api.json
+接口文档地址：[https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/api.json](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/docs/api.json)
 
 ## 十、扩展
 1. 数据同步优化
