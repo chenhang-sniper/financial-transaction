@@ -72,6 +72,7 @@
 ```bash
 docker --version
 docker-compose --version
+```
 
 ### 2. 构建镜像
 在项目根目录下运行以下命令来构建前端和后端镜像：
@@ -99,10 +100,9 @@ docker-compose down
 ```java
 @Service
 public class TransactionServiceImpl implements TransactionService {
-
   @Autowired
   private TransactionDao transactionDao;
-
+  //读写锁
   private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
   @Cacheable(value = "transactions", key = "#accountId + #transactionType + #transactionStatus + #transactionMethod + #starTime + #endTime + #pageNo + #pageSize")
@@ -133,6 +133,7 @@ public class TransactionServiceImpl implements TransactionService {
 ### 2. 可扩展性和接口健壮性设计
 
 ```java
+/** 全局异常捕捉 **/
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -142,7 +143,7 @@ public class GlobalExceptionHandler {
     return new Result<>(e.getCode(), e.getMessage());
   }
 }
-
+/** 所有错误异常枚举 **/
 public enum Status {
   SUCCESS(0, "success", "成功"),
   INTERNAL_SERVER_ERROR(1000, "Internal Server Error: {0}", "服务端异常: {0}"),
@@ -155,11 +156,29 @@ public enum Status {
   FIND_TRANSACTION_ERROR(1007, "Find transaction error", "查找交易失败"),
   FIND_TRANSACTION_LIST_ERROR(1008, "Find transaction list error", "查找交易列表失败");
 }
+
+/** 参数校验 **/
+public class TransactionValidator {
+    public static void validateTransactionRequest(TransactionCreateRequest request) {
+        // Check if the transaction type is empty
+        if (request.getTransactionType() == null) {
+            throw new ServiceException(Status.REQUEST_PARAMS_NOT_VALID_ERROR, "Transaction type cannot be empty.");
+        }
+        // Check if the transaction amount is greater than zero
+        if (request.getAmount() == null || request.getAmount().compareTo(BigDecimal.ZERO) <= 0) {
+            throw new ServiceException(Status.REQUEST_PARAMS_NOT_VALID_ERROR,"Transaction amount must be greater than zero.");
+        }
+        // Check if the transaction account ID is null
+        if (request.getAccountId() == null) {
+            throw new ServiceException(Status.REQUEST_PARAMS_NOT_VALID_ERROR, "Transaction account cannot be null.");
+        }
+    }
+}
 ``` 
 
 ## 八、测试
-单元测试：使用 JUnit 和 Mockito 对各模块进行单元测试。
-集成测试：启动 Docker 容器后，通过 Postman 或 curl 测试 API 接口。
+### 单元测试：使用 JUnit 和 Mockito 对各模块进行单元测试。
+### 集成测试：启动 Docker 容器后，通过 Postman 或 curl 测试 API 接口。
 
 ## 九、接口文档
 接口文档地址：https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/api.json
