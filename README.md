@@ -83,8 +83,10 @@ docker-compose build
 docker-compose up -d
 
 ### 4. 验证部署
-后端服务：访问 http://localhost:8080/swagger-ui.html 查看后端 API 文档
-前端应用：访问 http://localhost 查看前端应用
+查看后端 API 文档
+- 访问 http://localhost:8080/swagger-ui.html
+查看前端应用 
+- 访问 http://localhost 
 
 ### 5. 停止和删除服务
 停止服务：
@@ -174,11 +176,39 @@ public class TransactionValidator {
         }
     }
 }
-``` 
+```
+
+### 3. 内存Mapper
+
+```java
+public class MemoryMapper<Entity extends MemoryEntity> {
+    // ID生成器（线程安全）
+    private final AtomicLong idGenerator = new AtomicLong(0);
+
+    // 索引存储：按ID快速查找（线程安全）
+    private final ConcurrentMap<Long, Entity> indexMapping = new ConcurrentHashMap<>();
+
+    /**
+     * 保存一个实体如果实体的ID为空，则生成一个新的ID
+     * 并将当前时间戳设置为实体的时间戳
+     *
+     * @param model 要保存的实体
+     * @return 保存后的实体
+     */
+    public Entity save(Entity model) {
+        if (model.getId() == null) {
+            //自增
+            model.setId(idGenerator.incrementAndGet());
+        }
+        model.setTimestamp(LocalDateTime.now());
+        indexMapping.put(model.getId(), model);
+        return model;
+    }
+```
 
 ## 八、测试
-### 单元测试：使用 JUnit 和 Mockito 对各模块进行单元测试。
-### 集成测试：启动 Docker 容器后，通过 Postman 或 curl 测试 API 接口。
+-  单元测试：使用 JUnit 和 Mockito 对各模块进行单元测试。
+-  集成测试：启动 Docker 容器后，通过 Postman 或 curl 测试 API 接口。
 
 ## 九、接口文档
 接口文档地址：https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/api.json
