@@ -250,16 +250,18 @@ public class MemoryMapper<Entity extends MemoryEntity> {
     mvn  surefire-report:report
    ```
 以下是单元测试报告的链接：<a href="https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/report/surefire-report.html" target="_blank">测试报告</a>
+ [报告截图](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/images/junit-test.png)
   -  使用JaCoCo插件执行测试，并生成覆盖率报告。在Maven中，可以通过以下命令来执行：
    ```bash
     mvn  test
    ```
-覆盖率报告：<a href="https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/report/surefire-report.html](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/images/tests-coverage.png" target="_blank">测试报告</a>
+以下是覆盖率报告截图：
+ [覆盖率报告](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/images/tests-coverage.png)
 
 ### 2. 压力测试
   -  使用JMeter进行压力测试，编写[测试样例数据](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/report/sample_data.csv)1000条，安装Random CSV Data插件，编写测试脚本，并运行测试。
   -  使用10000个线程1秒钟并发请求，由于是内存存储实体，所以速度还是挺快的，吞吐量基本上达到单个tomcat的性能峰值。测试结果截图示例如下：
-  -  ![](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/iamge/pressure-test.png)
+  -  ![](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/images/pressure-test.png)
   -  以下是压力测试报告的链接：[测试报告](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/report/jmeter_report.csv)
     
 ## 九、接口文档
