@@ -251,7 +251,7 @@ public class MemoryMapper<Entity extends MemoryEntity> {
     mvn  surefire-report:report
    ```
 以下是单元测试报告的链接：<a href="https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/report/surefire-report.html" target="_blank">测试报告</a>
- [报告截图](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/images/junit-test.png)
+ [报告截图](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/images/junit-test-report.png)
   -  使用JaCoCo插件执行测试，并生成覆盖率报告。在Maven中，可以通过以下命令来执行：
    ```bash
     mvn  test
@@ -266,7 +266,7 @@ public class MemoryMapper<Entity extends MemoryEntity> {
   -  以下是压力测试报告的链接：[测试报告](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/report/jmeter_report.csv)
     
 ## 九、接口文档
-  -   [接口文档](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/api.json)
+  -   [接口文档](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/docs/api.json)
 
 ## 十、扩展
 1. 数据同步优化
