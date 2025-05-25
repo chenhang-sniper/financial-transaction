@@ -209,6 +209,7 @@ public class MemoryMapper<Entity extends MemoryEntity> {
         indexMapping.put(model.getId(), model);
         return model;
     }
+}
 ```
 
 ### 3. 第三方库
