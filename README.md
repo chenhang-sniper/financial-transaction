@@ -100,30 +100,6 @@ docker-compose stop
 docker-compose down
 ```
 
-### 6.第三方库
-- Spring Boot Starter Web
-  - 用于构建 Web 应用程序，提供嵌入式 Tomcat 服务器和 Spring MVC 支持，简化 Web 开发流程。
-- Spring Boot Starter
-  - 提供 Spring Boot 应用的基本配置和依赖项，是构建 Spring Boot 应用的核心依赖。
--  Spring Boot Starter Validation
-  - 提供数据验证功能，支持使用 JSR-380 规范对数据进行校验，确保输入数据的合法性。
-- SpringDoc OpenAPI Starter Webmvc UI
-  - 用于生成 API 文档和交互式界面，便于开发者查看和测试 API，符合 OpenAPI 标准。
-- Jackson Databind
-  - 处理 JSON 数据的序列化和反序列化，方便 JSON 格式数据的转换和操作，支持对象与 JSON 的双向转换。
-- Lombok
-  - 通过注解简化代码编写，减少样板代码，如自动生成 getter/setter 方法、构造函数、toString 方法等。
-- Spring Context
-  - 提供 Spring 框架的核心功能，包括依赖注入、事件发布/订阅等，是 Spring 应用的基础模块。
-- JUnit Jupiter API
-  - 提供 JUnit 5 测试框架的 API，用于编写和运行单元测试，支持更灵活的测试语法和注解。
-- JUnit Jupiter Engine
-  - 提供 JUnit 5 测试框架的运行引擎，用于执行单元测试，支持测试的发现和运行。
-- Spring Boot Starter Cache
-  - 提供缓存支持，方便与各种缓存实现（如 EhCache、Redis 等）进行集成，提高应用性能。
-- Mockito Core
-  - 提供模拟对象功能，用于在单元测试中模拟依赖项的行为，便于编写隔离的单元测试。
-
 ## 七、源代码相关描述
 
 ### 1. 并发控制和缓存加速
@@ -235,23 +211,57 @@ public class MemoryMapper<Entity extends MemoryEntity> {
     }
 ```
 
+### 3. 第三方库
+- Spring Boot Starter Web
+  - 用于构建 Web 应用程序，提供嵌入式 Tomcat 服务器和 Spring MVC 支持，简化 Web 开发流程。
+- Spring Boot Starter
+  - 提供 Spring Boot 应用的基本配置和依赖项，是构建 Spring Boot 应用的核心依赖。
+- Spring Boot Starter Validation
+  - 提供数据验证功能，支持使用 JSR-380 规范对数据进行校验，确保输入数据的合法性。
+- SpringDoc OpenAPI Starter Webmvc UI
+  - 用于生成 API 文档和交互式界面，便于开发者查看和测试 API，符合 OpenAPI 标准。
+- Jackson Databind
+  - 处理 JSON 数据的序列化和反序列化，方便 JSON 格式数据的转换和操作，支持对象与 JSON 的双向转换。
+- Lombok
+  - 通过注解简化代码编写，减少样板代码，如自动生成 getter/setter 方法、构造函数、toString 方法等。
+- AspectJ Weaver
+  - 提供切面编程支持，允许在不修改原始代码的情况下，动态地添加横切关注点（如日志记录、性能监控等）。
+- Spring Boot Starter Cache
+  - 提供缓存支持，方便与各种缓存实现（如 EhCache、Redis 等）进行集成，提高应用性能。
+- Caffeine
+  - 高性能的本地缓存库，提供基于 Java 的缓存解决方案，支持高效的缓存操作和自动过期机制。
+- JSONAssert
+  - 提供 JSON 数据的断言功能，用于在单元测试中验证 JSON 响应是否符合预期。
+- Spring Boot Test Autoconfigure
+  - 提供 Spring Boot 测试支持，简化测试配置，便于编写和运行集成测试。
+- Spring Test
+  - 提供 Spring 框架的测试支持，包括 MockMvc 等工具类，便于编写和运行单元测试和集成测试。
+- JUnit Jupiter API
+  - 提供 JUnit 5 测试框架的 API，用于编写和运行单元测试，支持更灵活的测试语法和注解。
+- JUnit Jupiter Engine
+  - 提供 JUnit 5 测试框架的运行引擎，用于执行单元测试，支持测试的发现和运行。
+- Mockito Core
+  - 提供模拟对象功能，用于在单元测试中模拟依赖项的行为，便于编写隔离的单元测试。
+
 ## 八、测试
 ### 1. 单元测试
   -  使用使用Maven Surefire Report Plugin执行测试，并生成单元测试报告。在Maven中，可以通过以下命令来执行：
    ```bash
     mvn  surefire-report:report
    ```
-以下是单元测试报告的链接：[测试报告](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/report/surefire-report.html)
+以下是单元测试报告的链接：<a href="https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/report/surefire-report.html" target="_blank">测试报告</a>
   -  使用JaCoCo插件执行测试，并生成覆盖率报告。在Maven中，可以通过以下命令来执行：
    ```bash
     mvn  test
    ```
-以下是覆盖率报告的链接：[覆盖率报告](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/images/test-coverage.png)
+覆盖率报告：<a href="https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/report/surefire-report.html](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/images/tests-coverage.png" target="_blank">测试报告</a>
+
 ### 2. 压力测试
   -  使用JMeter进行压力测试，编写[测试样例数据](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/report/sample_data.csv)1000条，安装Random CSV Data插件，编写测试脚本，并运行测试。
   -  使用10000个线程1秒钟并发请求，由于是内存存储实体，所以速度还是挺快的，吞吐量基本上达到单个tomcat的性能峰值。测试结果截图示例如下：
   -  ![](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/iamge/pressure-test.png)
- 
+  -  以下是压力测试报告的链接：[测试报告](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/report/jmeter_report.csv)
+    
 ## 九、接口文档
   -   [接口文档](https://github.com/chenhang-sniper/financial-transaction/blob/main/docs/api.json)
 
