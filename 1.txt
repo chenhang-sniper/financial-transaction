@@ -1,0 +1,70 @@
+flowchart LR
+    %% 前端接入层
+    Front[前端请求<br/>biz_conversation_id] --> MapService[会话映射服务]
+    MapService -->|查Redis映射缓存| RedisMap[(Redis:biz→adk映射<br/>6h滑动TTL)]
+    MapService -->|无缓存查PG持久映射| PG_Map[(PG:biz_adk_session_mapping<br/>永久存储映射关系)]
+    
+    %% 底层原始数据持久层（权威数据源）
+    subgraph PG持久存储层
+        PG_Event[(adk_session_events<br/>原始事件主表)]
+        PG_Large[(event_large_payload<br/>超大报文完整附件)]
+        PG_Mid[(session_mid_summary<br/>L2中期分段摘要表)]
+    end
+
+    %% 核心管控门面
+    SMM[SectionMemoryManager<br/>会话记忆统一管理器]
+    
+    %% Redis热缓存层（仅轻量化视图，无完整原始报文）
+    subgraph Redis运行缓存层
+        Redis_L1[(Redis:L1热窗口<br/>最近N轮轻量化摘要视图)]
+        Redis_L3[(Redis:L3临时全局摘要<br/>token超限临时产物，不落地PG)]
+    end
+
+    %% 中期记忆L2
+    MidTerm[MidTerm中期记忆模块]
+    %% 长期记忆LTM
+    LTM[LongTermMemoryService<br/>全局Topic向量记忆]
+    VectorDB[(向量库：全局聚类Topic摘要)]
+    
+    %% LLM&Agent推理侧
+    Agent[Agent调度器]
+    LLM[大模型推理]
+    ToolFetch[明细获取工具<br/>FetchLargePayload/FetchSegmentHistory]
+
+    %% 链路1：会话重建/正常加载L1热窗口
+    PG_Event -->|会话重建：倒序取最新N轮，Python规则精简长报文| SMM
+    SMM -->|生成轻量化视图写入| Redis_L1
+    Redis_L1 --> SMM
+
+    %% 链路2：新交互生成原始Event异步落PG
+    Agent -->|用户提问/AI回复/工具调用生成Event| PG_Event
+    PG_Event -->|超大报文拆分完整原文| PG_Large
+    PG_Event -.MQ异步落库.-> PG_Event
+
+    %% 链路3：L1窗口溢出，异步生成L2中期分段摘要
+    Redis_L1 -->|轮次超出N阈值，后台异步压缩| MidTerm
+    MidTerm -->|分段摘要+event区间索引写入| PG_Mid
+    PG_Mid --> MidTerm
+
+    %% 链路4：L2两大核心能力
+    MidTerm -->|1.用户检索中期历史，返回摘要+索引元数据| Agent
+    MidTerm -->|2.离线异步批量合并、聚类| LTM
+    LTM -->|聚类结果持久化向量| VectorDB
+
+    %% 链路5：token击穿上限，生成临时L3全局摘要
+    Redis_L1 -->|总Token超限，压缩全部历史| SMM
+    SMM -->|生成L3临时摘要存入，清空原有L1| Redis_L3
+    Redis_L3 -->|本轮推理使用| Agent
+
+    %% 链路6：检索链路（L2中期 + LTM全局）
+    Agent -->|Query关键词并行两路检索| MidTerm
+    Agent -->|Query向量检索全局历史| LTM
+    MidTerm & VectorDB -->|轻量化摘要+索引指针| Agent
+
+    %% 链路7：模型判定摘要信息不足，按需拉取原始明细
+    Agent -->|摘要缺少细节，调用明细工具| ToolFetch
+    ToolFetch -->|根据REF/分段ID查询完整数据| PG_Large & PG_Event & PG_Mid
+    ToolFetch -->|完整原始内容临时补充上下文| LLM
+
+    %% 链路8：上下文送入LLM推理
+    Agent -->|系统提示+L1/L3视图+检索摘要| LLM
